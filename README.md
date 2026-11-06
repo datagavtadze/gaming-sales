@@ -52,7 +52,7 @@ gaming-deals/
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/gaming-deals.git
+git clone https://github.com/datagavtadze/gaming-sales.git
 ```
 
 2. Navigate to the project directory:
