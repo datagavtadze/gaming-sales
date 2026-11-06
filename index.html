@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ZX Gaming – Game deals</title>
+
+    <!-- Fonts (optional): if they fail to load, the fallback fonts in style.css are used -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Outfit:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- All the design lives in style.css -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="wrap">
+      <header class="site-header">
+        <a class="logo" href="index.html">ZX Gaming</a>
+
+        <!-- Search: script.js reads what you type and shows matching games -->
+        <div class="search cut" role="search">
+          <label class="sr-only" for="search">Search games</label>
+          <input
+            id="search"
+            type="search"
+            placeholder="Search games, e.g. GTA 5"
+            list="game-names"
+            autocomplete="off"
+          />
+          <datalist id="game-names"></datalist>
+          <!-- script.js fills this with game names -->
+        </div>
+
+        <nav class="site-nav" aria-label="Main">
+          <a href="#best-sales">Game catalog</a>
+        </nav>
+      </header>
+
+      <main>
+        <!-- Shown when the search box is empty -->
+        <div id="home-content">
+          <!-- ===== BEST STEAM OFFER ===== -->
+          <!-- Change the two colors in style="" to recolor the cover art -->
+          <article class="hero cut" aria-labelledby="gotd-title">
+            <div class="hero-body cut" id="featured-game">
+              <div
+                class="cover"
+                style="--c1: #5b2a86; --c2: #ff5c8a"
+                aria-hidden="true"
+              >
+                <span class="cover-letter">H</span>
+              </div>
+              <div class="hero-info">
+                <span class="pill">Steam price spotlight</span>
+                <h1 id="gotd-title">Loading Steam games…</h1>
+                <p>
+                  Browse Steam prices and sales. Search for a title to find more games.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- ===== STEAM GAME CATALOG ===== -->
+          <h2 class="section-title" id="best-sales">Steam games and prices</h2>
+
+          <div class="data-toolbar">
+            <p class="data-status" id="data-status" role="status">
+              Loading Steam games and prices…
+            </p>
+            <button class="refresh" id="refresh-deals" type="button">
+              Refresh prices
+            </button>
+          </div>
+          <div class="grid" id="sales-grid">
+            <!-- Current Steam game prices are filled automatically. -->
+          </div>
+        </div>
+
+        <!-- Shown when you type in the search box (script.js fills it) -->
+        <section id="results" hidden>
+          <h2 class="section-title" id="results-title"></h2>
+          <div class="grid" id="results-grid"></div>
+          <p class="results-note" id="no-results" hidden></p>
+        </section>
+      </main>
+    </div>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        Live Steam offers via
+        <a href="https://www.cheapshark.com/" target="_blank" rel="noopener"
+          >CheapShark</a
+        >. Steam handles checkout; prices can vary by region.
+      </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>

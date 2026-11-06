@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Continue to Steam to buy a PC game.">
+  <title>Buy game – ZX Gaming</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .purchase { width: min(680px, 100% - 40px); margin: 64px auto; padding: 32px; background: var(--surface); }
+    .purchase h1 { font-family: var(--font-display); margin: 18px 0 8px; }
+    .purchase p { color: var(--muted); margin: 12px 0; }
+    .purchase .price { margin: 22px 0; }
+    .purchase-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .purchase-note { font-size: .88rem; }
+    .back-link { color: var(--cyan); }
+  </style>
+</head>
+<body>
+  <main class="purchase cut">
+    <a class="back-link" href="index.html">← Back to ZX Gaming</a>
+    <span class="pill" style="display:table;margin-top:24px">Steam checkout</span>
+    <h1 id="game-title">Your game</h1>
+    <p id="purchase-summary">Continue to Steam to review the game and complete your purchase.</p>
+    <div class="price"><span class="now" id="game-price"></span></div>
+    <p class="purchase-note">Steam handles payment, ownership, and delivery. The listed USD price may vary by your Steam account region.</p>
+    <div class="purchase-actions">
+      <a class="buy" id="steam-link" href="https://store.steampowered.com/" target="_blank" rel="noopener">Continue to Steam</a>
+    </div>
+  </main>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const title = params.get("title") || "Game";
+    const price = Number(params.get("price"));
+    const appId = params.get("steamAppID") || "";
+    const dealUrl = params.get("dealUrl") || "";
+    document.getElementById("game-title").textContent = title;
+    document.title = `Buy ${title} – ZX Gaming`;
+    document.getElementById("purchase-summary").textContent = appId
+      ? "Review the current Steam offer and complete your purchase on Steam."
+      : "We could not match this offer to a Steam app ID. Search Steam for the game, then review its price and complete your purchase there.";
+    document.getElementById("game-price").textContent = Number.isFinite(price) && price >= 0
+      ? (price === 0 ? "Free to play" : new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(price))
+      : "Check price on Steam";
+    const steamLink = document.getElementById("steam-link");
+    steamLink.href = /^\d+$/.test(appId)
+      ? (/^https:\/\/www\.cheapshark\.com\/redirect\?dealID=/.test(dealUrl)
+          ? dealUrl
+          : `https://store.steampowered.com/app/${appId}/`)
+      : `https://store.steampowered.com/search/?term=${encodeURIComponent(title)}`;
+  </script>
+</body>
+</html>
